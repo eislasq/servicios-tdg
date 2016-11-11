@@ -1,0 +1,104 @@
+<form novalidate name="formAddTienda">
+    <div class="form-group" ng-class="{'alert alert-danger':(formAddTienda.$submitted && !formAddTienda.nombre.$valid)}">
+        <label for="nombre">Nombre del comercio</label>
+        <input type="text"
+               required="required" class="form-control" ng-model="tiendita.nombre" 
+               id="nombre" name="nombre" placeholder="Nombre del comercio">
+        <div ng-show="formAddTienda.$submitted || formAddTienda.nombre.$touched">
+            <span ng-show="formAddTienda.nombre.$error.required">Escribe un nombre para la tienda.</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'alert alert-danger':(formAddTienda.$submitted && !formAddTienda.direccion.$valid)}">
+        <label for="direccion">Dirección</label>
+        <input type="text" class="form-control" ng-model="tiendita.direccion" 
+               id="direccion"
+               name="direccion" 
+               placeholder="Dirección"
+               required="required"
+               >
+        <div ng-show="formAddTienda.$submitted || formAddTienda.direccion.$touched">
+            <span ng-show="formAddTienda.direccion.$error.required">Indica la dirección de la tineda.</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'alert alert-danger':(formAddTienda.$submitted && !formAddTienda.lat.$valid)}">
+        <label for="lat">Latitud</label>
+        <input type="text" readonly class="form-control" ng-model="tiendita.lat"
+               id="lat"
+               name="lat" 
+               placeholder="Latitud"
+               required="required">
+        <div ng-show="formAddTienda.$submitted || formAddTienda.lat.$touched">
+            <span ng-show="formAddTienda.lat.$error.required">Elige una ubicación en el mapa para calcular la latitud.</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'alert alert-danger':(formAddTienda.$submitted && !formAddTienda.lng.$valid)}">
+        <label for="lng">Longitud</label>
+        <input type="text" readonly class="form-control" ng-model="tiendita.lng"
+               id="lng"
+               name="lng"
+               placeholder="Longitud"
+               required="required">
+        <div ng-show="formAddTienda.$submitted || formAddTienda.lng.$touched">
+            <span ng-show="formAddTienda.lng.$error.required">Elige una ubicación en el mapa para calcular la longitud.</span>
+        </div>
+    </div>
+
+
+    <div id="map_canvas">
+        <ui-gmap-google-map 
+            center='map.center' 
+            zoom='map.zoom' 
+            options="map.options"
+            events="map.events"
+            bounds="map.bounds"
+            pan="true"
+            >
+
+            <ui-gmap-marker
+                idKey='markerHome.id'
+                coords='markerHome.location'
+                icon="markerHome.icon"
+                options="markerHome.options"
+                events="markerHome.events"
+                >
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+    <br/>
+    <div class="form-group" ng-class="{'alert alert-danger':(formAddTienda.$submitted && !formAddTienda.descripcion.$valid)}">
+        <label for="descripcion">Descripción</label>
+        <textarea type="text" class="form-control" ng-model="tiendita.descripcion" 
+                  id="descripcion"
+                  name="descripcion" 
+                  placeholder="Descripción del producto o servicio que ofrece."
+                  required="required"
+                  rows="5"
+                  ></textarea>
+        <div ng-show="formAddTienda.$submitted || formAddTienda.descripcion.$touched">
+            <span ng-show="formAddTienda.descripcion.$error.required">Indica la dirección de la tineda.</span>
+        </div>
+    </div>
+     <div class="form-group" ng-class="{'alert alert-danger':(formAddTienda.$submitted && !formAddTienda.logo.$valid)}">
+        <label for="logo">URL de logo</label>
+        <input type="url"
+               class="form-control" ng-model="tiendita.logo" 
+               id="logo" name="logo" placeholder="https: | ftp: |http://minegocio.com/logo.png">
+        <div ng-show="formAddTienda.$submitted || formAddTienda.logo.$touched">
+            <span ng-show="formAddTienda.logo.$error.url">Escribe una direccion web válida.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="form-control btn btn-info" ng-click="guardarTienda(formAddTienda, tiendita)">Guardar</button>
+    </div>
+</form>
+
+
+<style>
+    .angular-google-map,
+    .angular-google-map-container,
+    #main-container>div.ng-scope,
+    #map_canvas{
+        min-height: 400px;
+        height: 400px;
+    }
+</style>

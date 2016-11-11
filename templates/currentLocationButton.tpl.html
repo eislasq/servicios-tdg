@@ -1,0 +1,35 @@
+<div>
+    <div
+        id="current-location-div"
+        ng-show="sharedVars.markerHome.location.latitude"
+        ng-click="controlClick()"
+        style="
+        box-shadow: 2px 3px 5px gray;
+        border: solid 5px white;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        overflow: hidden;
+        font-size: 50px;
+        font-family: Arial,sans-serif;
+        background-color: white;
+        box-shadow: gray 1px 2px 5px;
+        color: gray;
+        background-image: url('data:image/png;base64,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');
+        background-size: auto 100%;
+        background-position: 360px;
+        margin: 10px;
+        "
+        >
+        <style>
+            #current-location-div:hover{
+                background-position: 200px!important;
+            }
+            #current-location-div:active{
+                background-position: 40px!important;
+            }
+        </style>
+    </div>
+</div>

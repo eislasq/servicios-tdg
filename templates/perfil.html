@@ -1,0 +1,41 @@
+<form>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <pre>{{perfil.email}}</pre>
+    </div>
+    <div class="form-group">
+        <label for="email">Rol</label>
+        <pre>{{perfil.rol}}</pre>
+    </div>
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" ng-model="perfil.nombre" id="nombre" placeholder="Nombre">
+    </div>
+    <div class="form-group">
+        <label for="apellido_parerno">Apellido paterno</label>
+        <input type="text" class="form-control" ng-model="perfil.apellido_paterno" id="apellido_paterno" placeholder="Apellido paterno">
+    </div>
+    <div class="form-group">
+        <label for="apellido_materno">Apellido materno</label>
+        <input type="text" class="form-control" ng-model="perfil.apellido_materno" id="apellido_materno" placeholder="Apellido materno">
+    </div>
+    <div class="form-group">
+        <label for="telefono">Telefonos</label>
+        <input type="tel" class="form-control" ng-model="perfil.telefonos" id="telefono" placeholder="Telefono">
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" class="form-control" ng-model="perfil.password" id="password" placeholder="Sin cambios">
+    </div>
+    <div class="form-group">
+        <label for="password2">Repita la contraseña</label>
+        <input type="password" class="form-control" ng-model="perfil.password2" id="password2" placeholder="Repita la contraseña para cambiarla">
+    </div>
+    <div class="alert alert-danger" ng-show="perfil.password !== perfil.password2">
+        Las contraseñas no coinciden
+    </div>
+    <div class="alert alert-success" ng-show="perfil.actualizado">
+        Se han guardado los cambios con exito.
+    </div>
+    <button ng-show="perfil.password === perfil.password2" type="submit" class="btn btn-default" ng-click="guardarPerfil(perfil)">Guardar cambios</button>
+</form>

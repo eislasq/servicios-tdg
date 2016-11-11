@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"/>
+        <title>Tiempos de gloria</title>
+        <meta name="description" content="Encuentra tienditas cercanas con entrega a domicilio.">
+        <meta name="keywords" content="tienditas de la esquina, pedidos a domicilio">
+        <meta name="author" content="Zombit">
+
+        <link id="favicon" rel="shortcut icon" href="img/favicon.ico" type="image/png">
+
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+        <link href="css/simple-sidebar.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/index.css"/>
+
+        <script src="//code.jquery.com/jquery.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.5.6/angular-route.min.js"></script>
+        <script src="//code.angularjs.org/1.5.6/angular-animate.min.js"></script>
+        <script src="js/lib/ui-bootstrap-tpls-1.1.0.min.js"></script>
+        <script src="//code.angularjs.org/1.5.6/i18n/angular-locale_es-mx.js"></script>
+
+        <script src='js/lib/node_modules/angular-google-maps/node_modules/lodash/lodash.min.js'></script>
+        <script src='js/lib/node_modules/angular-google-maps/node_modules/angular-simple-logger/dist/angular-simple-logger.js'></script>
+        <script src='js/lib/node_modules/angular-google-maps/dist/angular-google-maps.min.js'></script>
+
+        <!--<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>-->
+        <script src="https://www.gstatic.com/firebasejs/3.0.2/firebase.js"></script>
+        <!--<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>-->
+
+        <script>
+            angular.module('versionControl', [])
+                    .config(function ($provide) {
+                        $provide.provider('$version', function () {
+                            this.$get = function () {
+                                return 1.0;
+                            };
+                        });
+                    });
+
+
+            angular.module('firebase', [])
+                    .config(function ($provide) {
+                        $provide.provider('$firebase', function () {
+                            this.$get = function () {
+                                var config = {
+                                    apiKey: 'AIzaSyCH8H2ItMDCzQFNACUlIEslpmHdBB-aKws',
+                                    authDomain: 'servicios-tiempos-de-gloria.firebaseapp.com',
+                                    databaseURL: 'https://servicios-tiempos-de-gloria.firebaseio.com/',
+                                    storageBucket: 'gs://servicios-tiempos-de-gloria.appspot.com'
+                                };
+                                return firebase.initializeApp(config);
+                            };
+                        });
+                    });
+
+
+        </script>
+
+        <script></script>
+
+        <!--        <script src="3d/jquery.js"></script>
+                <script src="3d/bootstrap.min.js"></script>
+                <script src="3d/angular.min.js"></script>
+                <script src="3d/angular-route.min.js"></script>
+                <script src="3d/angular-locale_es-mx.js"></script>-->
+        <script src="js/index.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/factories.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/directives.js"></script>
+        <script src="js/controllers/LoginCtrl.js"></script>
+        <script src="js/controllers/NavigationCtrl.js"></script>
+        <script src="js/controllers/BreadCrumbsCtrl.js"></script>
+        <!--<script src="js/controllers/PermisosCtrl.js"></script>-->
+        <script src="js/controllers/PerfilCtrl.js"></script>
+        <!--<script src="js/controllers/UsuariosCtrl.js"></script>-->
+        <script src="js/controllers/DocCtrl.js"></script>
+        <script src="js/controllers/TienditasCtrl.js"></script>
+        <script src="js/controllers/CurrentLocationButtonCtrl.js"></script>
+        <script src="js/controllers/MisTiendasCtrl.js"></script>
+        <script src="js/controllers/AgregarTiendaCtrl.js"></script>
+
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-59907422-6', 'auto');
+        </script>
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <script src="https://apis.google.com/js/platform.js" async defer>
+            {
+                lang: 'es-419'
+            }
+        </script>
+
+
+    </head>
+    <body ng-app="Tienditas" ondragover="(function(){
+          event.stopPropagation();
+          event.preventDefault();
+          event.dataTransfer.dropEffect = 'copy';
+          })()"
+          ondrop="(function () {
+                      event.preventDefault();
+                      event.stopPropagation();
+                  })()">
+
+
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <i class="glyphicon menu hamburger" id="menu-toggle">
+                    <i id="menu-line1"></i>
+                    <i id="menu-line2"></i>
+                    <i id="menu-line3"></i>
+                </i>
+            </nav>
+
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" ng-controller="NavigationCtrl">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#/tienditas">
+                            <img alt="Tienditas" src="img/favicon.ico">
+                            Tienditas</a>
+                    </li>
+                    <li ng-if="!currentUser.fbuser" >
+                        <a href="#/login">
+                            <i class="fa fa-user"></i>
+                            Login</a>
+                    </li>
+                    <li ng-if="currentUser.fbuser" >
+                        <a href="#/perfil">
+                            <i class="fa fa-user"></i>
+                            Mi perfil</a>
+                    </li>
+                    <li ng-if="currentUser.fbuser">
+                        <a href="#/mis-tiendas">
+                            <i class="fa fa-shopping-basket"></i>
+                            Mis tiendas</a>
+                    </li>
+                    <li>
+                        <a href="#/doc">
+                            <i class="fa fa-book"></i>
+                            Documentación</a>
+                    </li>
+                    <li ng-if="currentUser.fbuser">
+                        <a href="javascript:false" ng-click="currentUser.logout()">
+                            <i class="fa fa-sign-out"></i>
+                            Salir</a>
+                    </li>
+                </ul>
+            </div>
+
+            <script>
+                $(".navbar-collapse").on('click', '.navbar-nav li a.menu-item', function (e) {
+                    $(".navbar-collapse").collapse('hide');
+                });
+                ///
+                $(document).keyup(function (e) {
+                    if (27 == e.which) {
+                        $('.alert-overlayer').last().remove();
+                    }
+                });
+                document.addEventListener('backbutton', function (e) {
+                    console.log(e, window.event);
+                    if ($('.alert-overlayer').size() > 0) {
+                        $('.alert-overlayer').last().remove();
+                        window.event.preventDefault();
+                        return false;
+                    }
+                });
+            </script>
+
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div ng-view></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="overlayer-loading">
+                <i class="fa fa-cog fa-spin"></i>
+            </div>
+            <div id="alerts"></div>
+            <script>
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+            </script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+<div id="map_canvas">
+    <ui-gmap-google-map 
+        center='map.center' 
+        zoom='map.zoom' 
+        options="map.options"
+        events="map.events"
+        bounds="map.bounds"
+        pan="true"
+        >
+
+        <ui-gmap-search-box
+            template='searchbox.template'
+            events='searchbox.events'
+            >
+        </ui-gmap-search-box>
+
+        <ui-gmap-marker
+            idKey='markerHome.id'
+            coords='markerHome.location'
+            icon="markerHome.icon"
+            options="markerHome.options"
+            >
+        </ui-gmap-marker>
+
+
+        <!--<div ng-if="markers.length === 1">-->
+        <ui-gmap-marker ng-repeat="(id, marker) in taxisMarkers"
+                        idKey='"marker-"+id'
+                        coords='marker.location'
+                        options='marker.options'
+                        click="resaltarMarker(marker)"
+                        icon="marker.icon"
+                        events="marker.events"
+                        >
+        </ui-gmap-marker>
+        <!--</div>-->
+
+        <!--<ui-gmap-polyline path="path" ></ui-gmap-polyline>-->
+
+        <ui-gmap-marker ng-repeat="markerFound in searchMarkers"
+                        idKey='markerFound.id'
+                        coords='markerFound.location'
+                        icon="markerFound.icon"
+                        options="markerFound.options"
+                        click="openMarkerInfo(markerFound)"
+                        >
+            <ui-gmap-window options="markerFound.infowindow.windowOptions" closeClick="closeInfoWindow(markerFound)">
+                <div>{{markerFound.options.title}}</div>
+            </ui-gmap-window>
+        </ui-gmap-marker>
+
+
+        <ui-gmap-map-control 
+            template="templates/currentLocationButton.tpl.html" 
+            position="right-bottom" 
+            controller="currentLocationButtonCtrl" 
+            index="1">
+        </ui-gmap-map-control>
+    </ui-gmap-google-map>
+</div>
+
+<style>
+    .angular-google-map,
+    .angular-google-map-container,
+    #main-container>div.ng-scope,
+    #map_canvas{
+        min-height: 400px;
+        height: 100%;
+
+    }
+
+
+
+    #page-content-wrapper{
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
